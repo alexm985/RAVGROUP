@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --brand-red: #EB3B2C;
+    --brand-orange: #F49A3A;
+    --brand-dark: #111111;
+    --brand-dark-sec: #1C1C1C;
+    --brand-offwhite: #F8F8F6;
+    --brand-border: #E5E5E5;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #F8F8F6;
+    color: #171717;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Custom Architectural Accent Styles */
+.brand-gradient {
+  background: linear-gradient(135deg, #EB3B2C 0%, #F49A3A 100%);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, #EB3B2C 0%, #F49A3A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-dark-gradient {
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(28, 28, 28, 0.98) 100%);
+}
+
+/* Hide scrollbar for category tabs on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
