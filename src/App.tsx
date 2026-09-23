@@ -16,10 +16,12 @@ import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { QuoteModal } from './components/QuoteModal';
+import { SearchModal } from './components/SearchModal';
 import { SolutionItem } from './data/companyData';
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [quoteSubject, setQuoteSubject] = useState('');
   const [selectedSolution, setSelectedSolution] = useState<SolutionItem | null>(null);
 
@@ -41,9 +43,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F8F6] text-[#171717] font-sans antialiased flex flex-col selection:bg-[#EB3B2C] selection:text-white">
+    <div className="min-h-screen bg-[#111111] text-white font-sans antialiased flex flex-col selection:bg-[#EB3B2C] selection:text-white">
       {/* Sticky Navigation */}
-      <Navbar onOpenQuote={() => handleOpenQuote('General Project Consultation')} />
+      <Navbar
+        onOpenQuote={() => handleOpenQuote('General Project Consultation')}
+        onOpenSearch={() => setIsSearchModalOpen(true)}
+      />
 
       {/* Main Content Sections */}
       <main className="flex-grow">
@@ -105,6 +110,13 @@ export default function App() {
         isOpen={isQuoteModalOpen}
         onClose={handleCloseQuote}
         defaultSubject={quoteSubject}
+      />
+
+      {/* Global Architectural Search Modal */}
+      <SearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+        onOpenQuote={handleOpenQuote}
       />
     </div>
   );

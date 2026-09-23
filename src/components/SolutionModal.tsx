@@ -36,22 +36,22 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6">
-      <div className="bg-white rounded max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-neutral-200 flex flex-col">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="bg-[#141414] text-white border border-neutral-700 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col relative">
         {/* Header with Visual Banner */}
-        <div className="relative aspect-[16/8] bg-[#111111] overflow-hidden">
+        <div className="relative aspect-[16/8] bg-black overflow-hidden">
           <ArchitecturalImage
             type={getImageType(solution.id) as any}
             customSrc={solution.image}
             alt={solution.imageAlt}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-black/40 to-transparent" />
 
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 bg-black/60 hover:bg-black text-white rounded-full transition-colors cursor-pointer"
+            className="absolute top-4 right-4 p-2 bg-black/80 hover:bg-[#EB3B2C] text-white transition-colors cursor-pointer border border-neutral-700"
             aria-label="Close Solution Modal"
           >
             <X className="w-5 h-5" />
@@ -64,7 +64,7 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
               <span>·</span>
               <span>{solution.subtitle}</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold font-['Plus_Jakarta_Sans']">
+            <h3 className="text-2xl sm:text-3xl font-black font-['Plus_Jakarta_Sans']">
               {solution.title}
             </h3>
           </div>
@@ -73,23 +73,23 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
         {/* Modal Body */}
         <div className="p-6 sm:p-8 space-y-6 flex-grow">
           <div>
-            <p className="text-base text-neutral-800 font-medium leading-relaxed">
+            <p className="text-sm sm:text-base text-neutral-200 font-medium leading-relaxed">
               {solution.description}
             </p>
-            <p className="text-sm text-neutral-500 mt-1 italic">
+            <p className="text-xs text-[#F49A3A] mt-1 font-mono uppercase tracking-wider">
               {solution.tagline}
             </p>
           </div>
 
           {/* Key Engineering Features */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold tracking-wider text-neutral-500 uppercase flex items-center gap-1.5">
+            <h4 className="text-xs font-mono font-bold tracking-wider text-neutral-400 uppercase flex items-center gap-1.5">
               <Shield className="w-4 h-4 text-[#EB3B2C]" />
-              Engineering Specifications & Advantages:
+              Engineering Specifications &amp; Standards:
             </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-neutral-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-neutral-300">
               {solution.features.map((feat) => (
-                <div key={feat} className="flex items-start gap-2.5 p-2.5 bg-[#F8F8F6] rounded border border-neutral-200">
+                <div key={feat} className="flex items-start gap-2.5 p-3 bg-neutral-900 border border-neutral-800">
                   <CheckCircle2 className="w-4 h-4 text-[#EB3B2C] shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </div>
@@ -98,34 +98,34 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
           </div>
 
           {/* Core Materials & Common Applications */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-neutral-100">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-neutral-800">
             <div className="space-y-2">
-              <h5 className="text-xs font-bold tracking-wider text-neutral-500 uppercase flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-[#F49A3A]" />
-                Specified Materials:
+              <h5 className="text-xs font-mono font-bold text-[#F49A3A] uppercase tracking-wider flex items-center gap-1.5">
+                <Box className="w-3.5 h-3.5 text-[#EB3B2C]" />
+                Engineered Materials:
               </h5>
               <div className="flex flex-wrap gap-1.5">
-                {solution.materials.map((mat) => (
+                {solution.materials.map((m) => (
                   <span
-                    key={mat}
-                    className="text-xs px-2.5 py-1 bg-neutral-100 text-neutral-800 font-medium rounded"
+                    key={m}
+                    className="text-xs px-2.5 py-1 bg-black/60 text-neutral-300 border border-neutral-800"
                   >
-                    {mat}
+                    {m}
                   </span>
                 ))}
               </div>
             </div>
 
             <div className="space-y-2">
-              <h5 className="text-xs font-bold tracking-wider text-neutral-500 uppercase flex items-center gap-1.5">
-                <Box className="w-4 h-4 text-[#EB3B2C]" />
+              <h5 className="text-xs font-mono font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#F49A3A]" />
                 Primary Applications:
               </h5>
               <div className="flex flex-wrap gap-1.5">
                 {solution.applications.map((app) => (
                   <span
                     key={app}
-                    className="text-xs px-2.5 py-1 bg-red-50 text-[#EB3B2C] border border-red-200 font-medium rounded"
+                    className="text-xs px-2.5 py-1 bg-black/60 text-neutral-400 border border-neutral-800"
                   >
                     {app}
                   </span>
@@ -134,25 +134,22 @@ export const SolutionModal: React.FC<SolutionModalProps> = ({
             </div>
           </div>
 
-          {/* Bottom Actions */}
-          <div className="pt-6 border-t border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+          {/* Modal Footer Actions */}
+          <div className="pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-xs text-neutral-400">
+              Technical cut-sheets and sample material kits available on request.
+            </div>
+
             <button
               onClick={() => {
                 const title = solution.title;
                 onClose();
-                onOpenQuote(`Project Quote for: ${title}`);
+                onOpenQuote(`Technical Inquiry: ${title}`);
               }}
-              className="w-full sm:w-auto px-7 py-3.5 bg-[#EB3B2C] hover:bg-[#d63426] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-bold tracking-wider text-white uppercase bg-gradient-to-r from-[#EB3B2C] to-[#F49A3A] transition-all cursor-pointer"
             >
-              <span>Request Quote for this Solution</span>
+              <span>REQUEST MATERIAL BOQ</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={onClose}
-              className="w-full sm:w-auto px-6 py-3.5 border border-neutral-300 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 rounded transition-colors"
-            >
-              Close
             </button>
           </div>
         </div>

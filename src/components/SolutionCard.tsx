@@ -9,7 +9,6 @@ interface SolutionCardProps {
 }
 
 export const SolutionCard: React.FC<SolutionCardProps> = ({ solution, onClick }) => {
-  // Map solution ID to corresponding architectural image type
   const getImageType = (id: string) => {
     switch (id) {
       case 'prefab-wooden':
@@ -32,11 +31,11 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({ solution, onClick })
   return (
     <div
       onClick={() => onClick(solution)}
-      className="group relative bg-white border border-neutral-200 rounded overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-neutral-300 flex flex-col h-full"
+      className="group relative bg-[#141414] border border-neutral-800 rounded-none overflow-hidden cursor-pointer transition-all duration-300 hover:border-[#EB3B2C]/70 flex flex-col h-full shadow-lg"
     >
-      {/* Top Image Box */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-[#111111]">
-        <div className="w-full h-full transform transition-transform duration-500 ease-out group-hover:scale-105">
+      {/* Large Image Container */}
+      <div className="relative aspect-[16/11] overflow-hidden bg-[#0A0A0A]">
+        <div className="w-full h-full transform transition-transform duration-700 ease-out group-hover:scale-108">
           <ArchitecturalImage
             type={getImageType(solution.id) as any}
             customSrc={solution.image}
@@ -45,32 +44,43 @@ export const SolutionCard: React.FC<SolutionCardProps> = ({ solution, onClick })
           />
         </div>
 
-        {/* Category Number Badge */}
-        <div className="absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5 px-3 py-1 bg-[#111111]/90 backdrop-blur-xs text-white rounded-xs border border-neutral-700/60 font-mono text-xs font-bold tabular-nums">
-          <span className="text-[#F49A3A]">{solution.number}</span>
-          <span className="text-neutral-400">/</span>
-          <span className="text-neutral-300 text-[10px] tracking-wider">SOLUTIONS</span>
+        {/* Cinematic Scrim & Dark Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-black/35 to-black/20 group-hover:via-black/55 transition-all duration-300" />
+
+        {/* Large Number Badge */}
+        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1 bg-black/85 backdrop-blur-xs text-white border border-neutral-700/80 font-mono text-xs font-bold tabular-nums">
+          <span className="text-[#EB3B2C] group-hover:text-[#F49A3A] transition-colors">{solution.number}</span>
+          <span className="text-neutral-500">/</span>
+          <span className="text-neutral-300 text-[10px] tracking-widest uppercase">DIVISION</span>
         </div>
 
-        {/* Hover Accent Top Line */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-neutral-200 group-hover:bg-gradient-to-r group-hover:from-[#EB3B2C] group-hover:to-[#F49A3A] transition-all duration-300" />
+        {/* Red Accent Indicator Line (expands on hover) */}
+        <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-[#EB3B2C] to-[#F49A3A] group-hover:w-full transition-all duration-300" />
       </div>
 
-      {/* Card Body */}
-      <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between space-y-4">
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold tracking-tight text-[#171717] group-hover:text-[#EB3B2C] transition-colors font-['Plus_Jakarta_Sans']">
+      {/* Card Content Body */}
+      <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between space-y-5 bg-[#141414]">
+        <div className="space-y-2.5">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-[#EB3B2C]" />
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#F49A3A]">
+              {solution.tagline}
+            </span>
+          </div>
+
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#F49A3A] transition-colors font-['Plus_Jakarta_Sans']">
             {solution.title}
           </h3>
-          <p className="text-sm text-neutral-600 leading-relaxed line-clamp-3">
+
+          <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed line-clamp-3">
             {solution.description}
           </p>
         </div>
 
-        {/* Card Footer with Arrow */}
-        <div className="pt-3 border-t border-neutral-100 flex items-center justify-between text-xs font-bold tracking-wider uppercase text-neutral-700 group-hover:text-[#EB3B2C] transition-colors">
+        {/* Footer with Arrow Animation */}
+        <div className="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-bold tracking-wider uppercase text-neutral-300 group-hover:text-white transition-colors">
           <span>EXPLORE SPECIFICATIONS</span>
-          <div className="w-8 h-8 rounded-full bg-neutral-100 group-hover:bg-[#EB3B2C] group-hover:text-white flex items-center justify-center transition-all duration-200 group-hover:translate-x-1">
+          <div className="w-8 h-8 rounded-none bg-neutral-800 group-hover:bg-[#EB3B2C] text-white flex items-center justify-center transition-all duration-300 group-hover:translate-x-1.5">
             <ArrowRight className="w-4 h-4" />
           </div>
         </div>

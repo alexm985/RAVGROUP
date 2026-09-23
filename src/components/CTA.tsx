@@ -8,37 +8,45 @@ interface CTAProps {
 
 export const CTA: React.FC<CTAProps> = ({ onOpenQuote }) => {
   return (
-    <section className="relative py-20 sm:py-24 brand-gradient text-white overflow-hidden shadow-inner">
-      {/* Subtle Geometric Wireframe Grid Overlay */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+    <section className="relative py-24 sm:py-32 brand-gradient text-white overflow-hidden shadow-2xl">
+      {/* Subtle Architectural Background Texture & Blueprint Grid */}
+      <div className="absolute inset-0 opacity-15 pointer-events-none">
         <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="ctaGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+            <pattern id="archBlueprintGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+              <path d="M 48 0 L 0 0 0 48" fill="none" stroke="white" strokeWidth="1" strokeOpacity="0.8" />
+              <circle cx="24" cy="24" r="1.5" fill="white" fillOpacity="0.4" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#ctaGrid)" />
+          <rect width="100%" height="100%" fill="url(#archBlueprintGrid)" />
         </svg>
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/20 backdrop-blur-xs rounded-full border border-white/20 text-xs font-bold uppercase tracking-widest">
-          <span>RAPID ARCHITECTURAL SUPPORT</span>
+      {/* Subtle Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/20 pointer-events-none" />
+
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/25 backdrop-blur-xs border border-white/30 text-[11px] font-mono font-bold uppercase tracking-widest text-white">
+          <span>CONSULTATION &amp; SPECIFICATION TAKEOFF</span>
         </div>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase font-['Plus_Jakarta_Sans'] text-white">
+        {/* Exact Headline Requested: PLANNING YOUR NEXT PROJECT? */}
+        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase font-['Plus_Jakarta_Sans'] text-white leading-[1.04]">
           PLANNING YOUR NEXT PROJECT?
         </h2>
 
-        <p className="text-base sm:text-xl text-white/95 max-w-2xl mx-auto font-medium leading-relaxed">
-          Tell us what you&apos;re building. Our team will help you find the right material and construction solutions.
+        {/* Exact Text Requested */}
+        <p className="text-base sm:text-xl lg:text-2xl text-white/95 max-w-3xl mx-auto font-medium leading-relaxed font-['Plus_Jakarta_Sans']">
+          From prefab structures to roofing, cladding, flooring and boards — get complete project solutions from RAVGROUP.
         </p>
 
-        {/* CTA Buttons */}
+        {/* Exact Buttons Requested:
+            GET A PROJECT QUOTE
+            TALK TO AN EXPERT */}
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={onOpenQuote}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#111111] hover:bg-black text-white text-sm font-bold tracking-wider uppercase rounded shadow-2xl transition-all active:scale-[0.98] cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#111111] hover:bg-black text-white text-xs sm:text-sm font-bold tracking-wider uppercase rounded-none shadow-2xl transition-all active:scale-[0.98] cursor-pointer"
           >
             <span>GET A PROJECT QUOTE</span>
             <ArrowRight className="w-4 h-4 text-[#F49A3A]" />
@@ -46,7 +54,7 @@ export const CTA: React.FC<CTAProps> = ({ onOpenQuote }) => {
 
           <a
             href={`tel:${COMPANY_CONFIG.phone}`}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 hover:bg-white/25 border border-white/40 text-white text-sm font-bold tracking-wider uppercase rounded transition-all backdrop-blur-xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-white/20 hover:bg-white/30 border border-white/50 text-white text-xs sm:text-sm font-bold tracking-wider uppercase rounded-none transition-all backdrop-blur-xs"
           >
             <PhoneCall className="w-4 h-4" />
             <span>TALK TO AN EXPERT</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Home, Trees, Compass, Sparkles } from 'lucide-react';
+import { ArrowRight, Trees, Compass, CheckCircle2, Shield, Sparkles } from 'lucide-react';
 import { ArchitecturalImage } from './ArchitecturalImage';
 import { PREFAB_HIGHLIGHTS } from '../data/companyData';
 
@@ -9,46 +9,56 @@ interface PrefabShowcaseProps {
 
 export const PrefabShowcase: React.FC<PrefabShowcaseProps> = ({ onOpenQuote }) => {
   return (
-    <section id="prefab" className="relative py-24 sm:py-32 bg-[#111111] overflow-hidden">
-      {/* Background Architectural Vector */}
+    <section id="prefab" className="relative py-28 sm:py-36 bg-[#0B0B0B] text-white overflow-hidden">
+      {/* Huge Full-Width Cinematic Background Image */}
       <div className="absolute inset-0 z-0">
         <ArchitecturalImage
           type="prefab-showcase"
-          alt="Luxury A-frame wooden resort cabin in alpine landscape"
+          alt="Luxury modern wooden prefab cottage resort cabin nestled in pine mountain landscape with warm architectural interior illumination"
           className="w-full h-full object-cover"
         />
-        {/* Scrim Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/85 to-[#111111]/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-[#111111]/60" />
+        {/* Deep Cinematic Architectural Scrim */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-transparent to-black/70" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl space-y-6">
-          {/* Section Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1C1C1C]/90 border border-neutral-700/80 rounded-xs">
+        <div className="max-w-3xl space-y-7">
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/80 border border-neutral-700/80 rounded-none">
             <span className="w-2 h-2 rounded-full bg-[#EB3B2C]" />
-            <span className="text-xs font-bold tracking-[0.2em] text-[#F49A3A] uppercase font-['Plus_Jakarta_Sans']">
-              PREFAB & WOODEN SOLUTIONS
+            <span className="text-xs font-mono font-bold tracking-[0.22em] text-[#F49A3A] uppercase">
+              PREFAB &amp; WOODEN SOLUTIONS
             </span>
           </div>
 
-          {/* Headline */}
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight font-['Plus_Jakarta_Sans']">
-            Your Dream Resort.
-            <br />
-            <span className="brand-gradient-text">Built Smarter.</span>
-          </h2>
+          {/* Exact Headline Requested:
+              YOUR SPACE.
+              BUILT DIFFERENT. */}
+          <div className="space-y-1">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black uppercase tracking-tight text-white leading-[1.02] font-['Plus_Jakarta_Sans']">
+              YOUR SPACE.
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#EB3B2C] via-[#F49A3A] to-white">
+                BUILT DIFFERENT.
+              </span>
+            </h2>
+          </div>
 
-          {/* Description */}
-          <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-2xl">
-            Create premium cottages, cabins, resorts and hospitality spaces with modern prefab and wooden construction solutions. Factory-precision manufacturing meets natural warmth and rapid erection.
+          {/* Exact Supporting Text Requested */}
+          <p className="text-base sm:text-xl text-neutral-200 leading-relaxed font-['Plus_Jakarta_Sans'] font-medium">
+            Explore premium prefab and wooden solutions for resorts, cottages, cabins and hospitality projects.
           </p>
 
-          {/* Action Button */}
-          <div className="pt-2">
+          <p className="text-xs sm:text-sm text-neutral-400 max-w-2xl leading-relaxed">
+            Engineered factory off-site fabrication ensures rapid assembly, supreme acoustic and thermal insulation, and minimal ecological footprint in delicate mountain or coastal terrains.
+          </p>
+
+          {/* Exact CTA Requested: DISCUSS YOUR PROJECT */}
+          <div className="pt-3">
             <button
               onClick={() => onOpenQuote('Prefab & Wooden Resort Development')}
-              className="inline-flex items-center gap-3 px-8 py-4 text-sm font-bold tracking-wider text-white uppercase bg-[#EB3B2C] hover:bg-[#d63426] active:scale-[0.98] transition-all rounded shadow-xl cursor-pointer"
+              className="inline-flex items-center gap-3 px-8 py-4 text-xs sm:text-sm font-bold tracking-wider text-white uppercase bg-gradient-to-r from-[#EB3B2C] to-[#F49A3A] hover:brightness-110 active:scale-[0.98] transition-all rounded-none shadow-2xl cursor-pointer"
             >
               <span>DISCUSS YOUR PROJECT</span>
               <ArrowRight className="w-4 h-4" />
@@ -56,20 +66,18 @@ export const PrefabShowcase: React.FC<PrefabShowcaseProps> = ({ onOpenQuote }) =
           </div>
         </div>
 
-        {/* Floating Information Cards */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Minimal Editorial Highlight Modules (Not generic rounded boxes) */}
+        <div className="mt-20 pt-10 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {PREFAB_HIGHLIGHTS.map((item, idx) => (
             <div
               key={item.title}
-              className="p-6 rounded bg-[#1A1A1A]/85 backdrop-blur-md border border-neutral-800 hover:border-[#F49A3A]/60 transition-all duration-300 hover:-translate-y-1 group"
+              className="space-y-2 group"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono font-bold text-[#EB3B2C]">
-                  0{idx + 1}
-                </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#F49A3A]" />
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#EB3B2C]">
+                <span>0{idx + 1}</span>
+                <div className="h-px w-6 bg-[#EB3B2C]" />
               </div>
-              <h3 className="text-base font-extrabold text-white group-hover:text-[#F49A3A] transition-colors tracking-wide font-['Plus_Jakarta_Sans'] mb-2">
+              <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#F49A3A] transition-colors font-['Plus_Jakarta_Sans']">
                 {item.title}
               </h3>
               <p className="text-xs text-neutral-400 leading-relaxed">

@@ -1,6 +1,6 @@
-import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
-import { APPLICATIONS_LIST, ApplicationItem } from '../data/companyData';
+import React, { useRef } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { APPLICATIONS_LIST } from '../data/companyData';
 import { ArchitecturalImage } from './ArchitecturalImage';
 
 interface ApplicationsProps {
@@ -8,7 +8,8 @@ interface ApplicationsProps {
 }
 
 export const Applications: React.FC<ApplicationsProps> = ({ onOpenQuote }) => {
-  // Map application IDs to image types
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const getImageType = (id: string) => {
     switch (id) {
       case 'hotels-resorts':
@@ -32,68 +33,97 @@ export const Applications: React.FC<ApplicationsProps> = ({ onOpenQuote }) => {
     }
   };
 
-  return (
-    <section id="applications" className="py-20 sm:py-28 bg-[#F8F8F6] border-b border-neutral-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16 space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-[3px] bg-[#EB3B2C]" />
-            <span className="text-xs font-bold tracking-[0.2em] text-[#EB3B2C] uppercase font-['Plus_Jakarta_Sans']">
-              APPLICATIONS
-            </span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#171717] font-['Plus_Jakarta_Sans']">
-            Built for Every Kind of Project.
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-600">
-            From high-altitude remote chalets to large urban commercial campuses, RAVGROUP provides calibrated solutions tested for every structural context.
-          </p>
-        </div>
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const offset = direction === 'left' ? -420 : 420;
+      scrollContainerRef.current.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+  };
 
-        {/* 8-Card Modern Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {APPLICATIONS_LIST.map((item) => (
+  return (
+    <section id="applications" className="py-24 sm:py-32 bg-[#0E0E0E] text-white border-b border-neutral-800 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Editorial Section Header with Carousel Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="max-w-2xl space-y-3.5">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-[2px] bg-[#EB3B2C]" />
+              <span className="text-xs font-mono font-bold tracking-[0.22em] text-[#EB3B2C] uppercase">
+                ARCHITECTURAL APPLICATIONS
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white font-['Plus_Jakarta_Sans'] leading-[1.08]">
+              Built for Every Kind of Project.
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-neutral-400 leading-relaxed max-w-xl">
+              From remote high-altitude mountain resorts to bespoke farmhouses, private villas, and commercial spaces.
+            </p>
+          </div>
+
+          {/* Horizontal Scroll Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll('left')}
+              className="p-3 bg-neutral-900 hover:bg-[#EB3B2C] text-neutral-300 hover:text-white border border-neutral-800 transition-colors"
+              aria-label="Previous applications"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              className="p-3 bg-neutral-900 hover:bg-[#EB3B2C] text-neutral-300 hover:text-white border border-neutral-800 transition-colors"
+              aria-label="Next applications"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal Visual Panoramic Track */}
+      <div className="pl-4 sm:pl-6 lg:pl-8 max-w-7xl mx-auto">
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 pr-6"
+        >
+          {APPLICATIONS_LIST.map((item, index) => (
             <div
               key={item.id}
-              onClick={() => onOpenQuote(`Inquiry for ${item.title}`)}
-              className="group relative bg-white rounded overflow-hidden border border-neutral-200 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col"
+              onClick={() => onOpenQuote(`Application: ${item.title}`)}
+              className="w-[300px] sm:w-[360px] md:w-[400px] shrink-0 group relative bg-[#141414] border border-neutral-800 hover:border-[#EB3B2C]/70 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
             >
-              {/* Image Aspect */}
-              <div className="relative aspect-[4/3] bg-neutral-900 overflow-hidden">
+              {/* Image Frame */}
+              <div className="relative aspect-[16/11] overflow-hidden bg-black">
                 <ArchitecturalImage
                   type={getImageType(item.id) as any}
                   customSrc={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-108"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-black/30 to-transparent" />
 
-                {/* Scrim */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-
-                {/* Overlay Title */}
-                <div className="absolute bottom-4 left-4 right-4 z-10">
-                  <div className="text-[11px] font-semibold text-[#F49A3A] tracking-wider uppercase mb-1">
-                    {item.subtitle}
-                  </div>
-                  <h3 className="text-lg font-extrabold text-white tracking-tight font-['Plus_Jakarta_Sans'] group-hover:text-[#F49A3A] transition-colors flex items-center justify-between">
-                    <span>{item.title}</span>
-                    <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-[#EB3B2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  </h3>
+                <div className="absolute top-4 left-4 font-mono text-[10px] font-bold text-[#F49A3A] px-2 py-0.5 bg-black/80 border border-neutral-800 uppercase tracking-widest">
+                  0{index + 1} • {item.subtitle}
                 </div>
               </div>
 
-              {/* Card Bottom Details */}
-              <div className="p-4 sm:p-5 flex-grow flex flex-col justify-between space-y-3 bg-white">
-                <p className="text-xs text-neutral-600 leading-relaxed">
-                  {item.description}
-                </p>
+              {/* Card Body */}
+              <div className="p-6 space-y-4 bg-[#141414] flex-grow flex flex-col justify-between">
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold tracking-tight text-white group-hover:text-[#F49A3A] transition-colors font-['Plus_Jakarta_Sans'] flex items-center justify-between">
+                    <span>{item.title}</span>
+                    <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-[#EB3B2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </h3>
+                  <p className="text-xs text-neutral-400 leading-relaxed line-clamp-3">
+                    {item.description}
+                  </p>
+                </div>
 
-                <div className="pt-2 border-t border-neutral-100 flex flex-wrap gap-1">
-                  {item.suitableSolutions.slice(0, 2).map((sol) => (
+                <div className="pt-3 border-t border-neutral-800/80 flex flex-wrap gap-1.5">
+                  {item.suitableSolutions.slice(0, 3).map((sol) => (
                     <span
                       key={sol}
-                      className="text-[10px] font-medium text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-xs"
+                      className="text-[10px] font-mono text-neutral-400 bg-neutral-900 border border-neutral-800 px-2 py-0.5"
                     >
                       {sol}
                     </span>
